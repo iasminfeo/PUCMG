@@ -1,0 +1,54 @@
+Pontifícia Universidade Católica de Minas Gerais 
+Instituto de Ciências Exatas e Informática – ICEI 
+Arquitetura de Computadores I
+Nome: Iasmin Ferreira e Oliveira
+Matrícula: 854946
+ 
+ARQ1 - Recuperação 02 
+Tema: Circuitos sequenciais e máquinas de estados finitos 
+ 
+Exercícios: 
+Dada a tabela abaixo: 
+
+| m   | a | b | c | d |   A | b | c | Da | Db | Dc |   Ta | Tb | Tc |   JaKa   |   JbKb   |   JcKc   |
+------------------------------------------------------------------------------------------------------
+| 0   | 0 | 0 | 0 | 0 |   0 | 0 | 0 |  0 |  0 |  0 |   0  |  0 |  0 |00,01 = 0x|00,01 = 0x|00,01 = 0x|
+| 1   | 0 | 0 | 0 | 1 |   0 | 0 | 1 |  0 |  0 |  1 |   0  |  0 |  1 |00,01 = 0x|00,01 = 0x|11,10 = 1x|
+| 2   | 0 | 0 | 1 | 0 |   0 | 0 | 1 |  0 |  0 |  1 |   0  |  0 |  0 |00,01 = 0x|00,01 = 0x|11,10 = 1x| 
+| 3   | 0 | 0 | 1 | 1 |   0 | 1 | 1 |  0 |  1 |  1 |   0  |  1 |  0 |00,01 = 0x|11,10 = 1x|11,10 = 1x|
+| 4   | 0 | 1 | 0 | 0 |   0 | 0 | 0 |  0 |  0 |  0 |   0  |  1 |  0 |00,01 = 0x|11,01 = x1|11,10 = 1x|
+| 5   | 0 | 1 | 0 | 1 |   0 | 1 | 1 |  0 |  1 |  1 |   0  |  0 |  1 |00,01 = 0x|11,10 = 1x|11,10 = 1x|
+| 6   | 0 | 1 | 1 | 0 |   0 | 1 | 1 |  0 |  1 |  1 |   0  |  0 |  0 |00,01 = 0x|11,10 = 1x|11,10 = 1x|
+| 7   | 0 | 1 | 1 | 1 |   1 | 0 | 1 |  1 |  0 |  1 |   1  |  1 |  0 |11,10 = 1x|11,01 = x1|11,10 = 1x|
+| 8   | 1 | 0 | 0 | 0 |   0 | 0 | 0 |  0 |  0 |  0 |   1  |  0 |  0 |11,01 = x1|00,01 = 0x|11,10 = 1x|
+| 9   | 1 | 0 | 0 | 1 |   1 | 0 | 1 |  1 |  0 |  1 |   0  |  0 |  1 |11,10 = 1x|00,01 = 0x|11,10 = 1x|
+| A   | 1 | 0 | 1 | 0 |   1 | 0 | 1 |  1 |  0 |  1 |   0  |  0 |  0 |11,10 = 1x|00,01 = 0x|11,10 = 1x|
+| B   | 1 | 0 | 1 | 1 |   1 | 1 | 1 |  1 |  1 |  1 |   0  |  1 |  0 |11,10 = 1x|11,10 = 1x|11,10 = 1x|
+| C   | 1 | 1 | 0 | 0 |   0 | 0 | 0 |  0 |  0 |  0 |   1  |  1 |  0 |11,01 = x1|11,01 = x1|11,10 = 1x|
+| D   | 1 | 1 | 0 | 1 |   1 | 1 | 1 |  1 |  1 |  1 |   0  |  0 |  1 |11,10 = 1x|11,10 = 1x|11,10 = 1x|
+| E   | 1 | 1 | 1 | 0 |   1 | 1 | 1 |  1 |  1 |  1 |   0  |  0 |  0 |11,10 = 1x|11,10 = 1x|11,10 = 1x|
+| F   | 1 | 1 | 1 | 1 |   0 | 0 | 0 |  0 |  0 |  0 |   1  |  1 |  1 |00,01 = 0x|11,01 = x1|11,01 = x1|
+
+a.) expressão simplificada por mintermos para Da
+
+F(ABCD)=	A C' D	+	A C D'	+	A B' C	+	A' B C D
+
+b.) expressão simplificada por MAXTERMOS para Db 
+
+F = (C+D)(B+D)(B+C)(B'+C'+D')
+
+c.) expressão simplificada por mintermos para Dc 
+
+F(ABCD)=	C' D	+	C D'	+	A' D	+	B' D
+
+d.) expressão simplificada por mintermos para Ta 
+
+F(ABCD)=	B C D	+	A C' D'
+
+e.) expressão simplificada por MAXTERMOS para Tb 
+
+F = (D)(B+C')(A+C')
+
+f.) expressão simplificada por mintermos para Tc
+
+F(ABCD)=	C' D	+	A B D
