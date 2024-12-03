@@ -313,7 +313,7 @@ public class quickPARC {
         filteredList.printAll();
 
         // Criação do log
-        String logFileName = "matricula_quicksort.txt"; // Substitua "matricula" pela sua matrícula
+        String logFileName = "854946.txt"; // Substitua "matricula" pela sua matrícula
         try (FileWriter writer = new FileWriter(logFileName)) {
             writer.write("854946\t" + comparisons[0] + "\t" + movements[0] + "\t" + (duration / 1e6) + "\n");
         } catch (IOException e) {

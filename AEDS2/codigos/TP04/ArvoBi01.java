@@ -354,5 +354,7 @@ public class ArvoBi01 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sc.close();
     }
+   
 }
