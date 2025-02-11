@@ -1,6 +1,12 @@
 package AEDS3.Estudos;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 
    // criando o objeto Livro com os atributos : id, títulp, autor, preço.
@@ -37,5 +43,27 @@ public class Livro {
             "\nTítulo: " + titulo +
             "\nAutor: " + autor +
             "\nPreço: R$ " + df.format(preco);
+    }
+
+    //METODO QUE DESCREVE O LIVRO POR MEIO DE UM VETOR DE BYTES
+    public byte[] toByteArray() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(baos);
+        dos.writeInt(idLivro);
+        dos.writeUTF(titulo);
+        dos.writeUTF(autor);
+        dos.writeFloat(preco);
+        return baos.toByteArray();
+    }
+
+    //METODO INVERSO: LE DO ARQUIVO O VETOR DE BYTES E CARREGA O OBJ
+
+    public void fromByteArray(byte[] ba) throws IOException {
+        ByteArrayInputStream bais = new ByteArrayInputStream(ba);
+        DataInputStream dis = new DataInputStream(bais);
+        idLivro = dis.readInt();
+        titulo = dis.readUTF();
+        autor = dis.readUTF();
+        preco = dis.readFloat();
     }
 }

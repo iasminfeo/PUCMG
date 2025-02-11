@@ -1,11 +1,5 @@
 package AEDS3.Estudos;
-
-
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.DataInputStream;
+ import java.io.RandomAccessFile;
 
 public class Main {
  
@@ -16,21 +10,12 @@ public class Main {
         Livro l2 = new Livro(2, "Natureza da Mordida", "Carla Madeira", 40.2F);
         
 
-
-        // printano os dois livros no terminal
-
-        // System.out.println(l1);
-        // System.out.println(l2);
-
         System.out.println("Diretório atual: " + System.getProperty("user.dir"));
 
         //criando o arquivo "arq" para printar os livros nele.
 
-        FileOutputStream arq;
-        DataOutputStream dos;
-
-        FileInputStream arq2;
-        DataInputStream dis;
+       RandomAccessFile arq;
+        byte[] ba;
 
         // utilizando o dataoutputstring (que funciona como um processamento intermediario para escrita no arquivo)
 
@@ -38,26 +23,21 @@ public class Main {
 
         try{
 
-            arq = new FileOutputStream("AEDS3/Estudos/dados/livros.db");
-            dos = new DataOutputStream(arq);
+        arq = new RandomAccessFile("AEDS3/Estudos/dados/livros.db", "rw");
 
+        long p1 = arq.getFilePointer();
 
-            
-         // "dos" pega o int e escreve no "arq"
+        ba = l1.toByteArray();
+        arq.writeInt(ba.length);
+        arq.write(ba);
+        
+        long p2 = arq.getFilePointer();
+        ba = l2.toByteArray();
+        arq.writeInt(ba.length);
+        arq.write(ba);
+        
+       
 
-         //      ESCRITA
-        dos.writeInt(l1.idLivro);
-        dos.writeUTF(l1.titulo); //string no padrao utf8
-        dos.writeUTF(l1.autor);
-        dos.writeFloat(l1.preco);
-
-        dos.writeInt(l2.idLivro);
-        dos.writeUTF(l2.titulo); //string no padrao utf8
-        dos.writeUTF(l2.autor);
-        dos.writeFloat(l2.preco);
-
-        dos.close();
-        arq.close();
 
 
 
@@ -65,25 +45,32 @@ public class Main {
         
         Livro l3 = new Livro();
         Livro l4 = new Livro();
-        
-        arq2 = new FileInputStream("AEDS3/Estudos/dados/livros.db");
-        dis = new DataInputStream(arq2);
+        int tam;
+        arq.seek(p1);
 
-        l3.idLivro = dis.readInt();
-        l3.titulo = dis.readUTF();
-        l3.autor = dis.readUTF();
-        l3.preco = dis.readFloat();
+        tam = arq.readInt();
+        ba = new byte[tam];
+        arq.read(ba);
+        l3.fromByteArray(ba);
 
-        l4.idLivro = dis.readInt();
-        l4.titulo = dis.readUTF();
-        l4.autor = dis.readUTF();
-        l4.preco = dis.readFloat();
+        arq.seek(p2);
+        tam = arq.readInt();
+        ba = new byte[tam];
+        arq.read(ba);
+        l4.fromByteArray(ba);
+
+        System.out.println(l3);
+
+        // l4.idLivro = dis.readInt();
+        // l4.titulo = dis.readUTF();
+        // l4.autor = dis.readUTF();
+        // l4.preco = dis.readFloat();
 
         System.out.println(l4);
 
-
+            arq.close();
        
-        } catch(IOException e){
+        } catch(Exception e){
             e.printStackTrace();
         }
        
