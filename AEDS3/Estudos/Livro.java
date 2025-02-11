@@ -22,6 +22,12 @@ public class Livro {
         autor = a;
         preco = p;
     }
+    public Livro() {
+    idLivro = -1;
+    titulo = "";
+    autor = "";
+    preco = 0F;
+    }
 
 
     // usando o metodo toString para tranformar o objeto em uma string legivel.
