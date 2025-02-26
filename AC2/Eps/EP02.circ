@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="2.16.1.4.jar" version="1.0">
+<project source="2.16.2.0.jar" version="1.0">
   This file is intended to be loaded by Logisim http://logisim.altervista.org
 
   <lib desc="#Wiring" name="0"/>
@@ -22,7 +22,7 @@
       <a name="valign" val="base"/>
     </tool>
   </lib>
-  <main name="main"/>
+  <main name="ULA 1 bit"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
     <a name="simlimit" val="1000"/>
@@ -56,8 +56,8 @@
     <tool lib="1" name="AND Gate"/>
     <tool lib="1" name="OR Gate"/>
   </toolbar>
-  <circuit name="main">
-    <a name="circuit" val="main"/>
+  <circuit name="ULA 1 bit">
+    <a name="circuit" val="ULA 1 bit"/>
     <a name="clabel" val=""/>
     <a name="clabelup" val="east"/>
     <a name="clabelfont" val="Dialog plain 12"/>
@@ -122,20 +122,36 @@
     <wire from="(180,270)" to="(180,310)"/>
     <wire from="(130,330)" to="(190,330)"/>
     <wire from="(130,290)" to="(130,330)"/>
+    <comp lib="0" loc="(510,210)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="4"/>
+    </comp>
     <comp lib="0" loc="(290,200)" name="Constant">
       <a name="width" val="4"/>
       <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="1" loc="(210,330)" name="NOT Gate">
+      <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(410,340)" name="Pin">
       <a name="facing" val="north"/>
       <a name="width" val="4"/>
       <a name="tristate" val="false"/>
     </comp>
-    <comp lib="1" loc="(270,220)" name="NAND Gate">
+    <comp lib="1" loc="(330,140)" name="NOR Gate">
       <a name="width" val="4"/>
     </comp>
-    <comp lib="1" loc="(290,280)" name="XOR Gate">
+    <comp lib="1" loc="(260,180)" name="AND Gate">
       <a name="width" val="4"/>
+    </comp>
+    <comp lib="1" loc="(230,170)" name="NOT Gate">
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="0" loc="(180,50)" name="Pin">
+      <a name="facing" val="south"/>
+      <a name="width" val="4"/>
+      <a name="tristate" val="false"/>
     </comp>
     <comp lib="1" loc="(250,250)" name="NOT Gate">
       <a name="width" val="4"/>
@@ -145,33 +161,17 @@
       <a name="width" val="4"/>
       <a name="enable" val="false"/>
     </comp>
-    <comp lib="1" loc="(210,330)" name="NOT Gate">
+    <comp lib="1" loc="(310,110)" name="NOT Gate">
       <a name="width" val="4"/>
     </comp>
-    <comp lib="0" loc="(510,210)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
+    <comp lib="1" loc="(270,220)" name="NAND Gate">
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="1" loc="(290,280)" name="XOR Gate">
       <a name="width" val="4"/>
     </comp>
     <comp lib="1" loc="(240,320)" name="AND Gate">
       <a name="width" val="4"/>
-    </comp>
-    <comp lib="1" loc="(260,180)" name="AND Gate">
-      <a name="width" val="4"/>
-    </comp>
-    <comp lib="1" loc="(310,110)" name="NOT Gate">
-      <a name="width" val="4"/>
-    </comp>
-    <comp lib="1" loc="(230,170)" name="NOT Gate">
-      <a name="width" val="4"/>
-    </comp>
-    <comp lib="1" loc="(330,140)" name="NOR Gate">
-      <a name="width" val="4"/>
-    </comp>
-    <comp lib="0" loc="(180,50)" name="Pin">
-      <a name="facing" val="south"/>
-      <a name="width" val="4"/>
-      <a name="tristate" val="false"/>
     </comp>
     <comp lib="0" loc="(130,50)" name="Pin">
       <a name="facing" val="south"/>
