@@ -64,7 +64,7 @@ public class Arquivo {
                 tam = arquivo.readShort();
                 b = new byte[tam];
                 arquivo.read(b);
-                
+
                 if ( lapide == ' ' ) {
                     obj.fromByteArray(b);
                     if ( obj.getId() == id) {
@@ -76,5 +76,88 @@ public class Arquivo {
         return null;
     } // end read ( )
 
-}
+    public boolean delete ( int id ) throws Exception {
+        boolean result = false;
+        Registro obj;
+        short tam;
+        byte[] b;
+        byte lapide;
+        Long endereco;
+        arquivo.seek(TAMANHO_CABECALHO);
+        while ( arquivo.getFilePointer() < arquivo.length() ) {
+            obj = construtor.newInstance();
+            endereco = arquivo.getFilePointer();
+            lapide = arquivo.readByte();
+            tam = arquivo.readShort();
+            b = new byte[tam];
+            arquivo.read(b);
 
+            if ( lapide == ' ' ) {
+                obj.fromByteArray(b);
+                if (obj.getId() == id) {
+                    arquivo.seek(endereco);
+                    arquivo.write('*');
+                    result = true;
+                } // end if
+            } // end if 
+        } // end while
+        return result;
+    } // end delete ( )
+
+    /**
+     *  Atualiza um registro no arquivo
+     *  @param novoObj objeto a ser atualizado
+     *  @return true se o registro foi atualizado, false caso contrário
+     *  @throws Exception
+     */
+    public boolean update (Registro novoObj ) throws Exception {
+        boolean result = false;
+       Registro obj;
+        short tam;
+        byte[] b;
+        byte lapide;
+        ParIDEndereco pie = indiceDireto.read(novoObj.getId());
+        if( pie!=null ) {
+            arquivo.seek(pie.getEndereco());
+            obj = construtor.newInstance();
+            lapide = arquivo.readByte();
+
+            if( lapide==' ' ) {
+                tam = arquivo.readShort();
+                b = new byte[tam];
+                arquivo.read(b);
+                obj.fromByteArray(b);
+
+                if( obj.getId()==novoObj.getId() ) {
+                    byte[] b2 = novoObj.toByteArray();
+                    short tam2 = (short)b2.length;
+
+                    if( tam2 <= tam ) { // sobrescreve o registro
+                        arquivo.seek(pie.getEndereco()+3);
+                        arquivo.write(b2);
+                    } else { // move o novo registro para o fim
+                        arquivo.seek(pie.getEndereco());
+                        arquivo.write('*');
+                        arquivo.seek(arquivo.length());
+                        long novoEndereco = arquivo.getFilePointer();
+                        arquivo.writeByte(' ');
+                        arquivo.writeShort(tam2);
+                        arquivo.write(b2);
+                        indiceDireto.update(new ParIDEndereco(novoObj.getId(), novoEndereco));
+                    } // end if
+                    result = true;
+                } // end if
+            } // end if
+        } // end if
+        return result;
+    } // end update ( )
+
+ /**
+     *  Fecha o arquivo
+     *  @throws IOException
+     */
+    public void close ( ) throws IOException {
+        arquivo.close( );
+    } // end close ( )
+
+} // end class Arquivo
