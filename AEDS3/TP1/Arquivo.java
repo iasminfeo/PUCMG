@@ -110,9 +110,9 @@ public class Arquivo {
      *  @return true se o registro foi atualizado, false caso contrário
      *  @throws Exception
      */
-    public boolean update (Registro novoObj ) throws Exception {
+    public boolean update (Registro  novoObj ) throws Exception {
         boolean result = false;
-       Registro obj;
+       Registro  obj;
         short tam;
         byte[] b;
         byte lapide;
